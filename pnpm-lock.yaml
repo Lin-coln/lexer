@@ -42,6 +42,9 @@ importers:
 
   packages/website:
     dependencies:
+      '@lexer/core':
+        specifier: workspace:*
+        version: link:../lexer
       clsx:
         specifier: ^2.1.1
         version: 2.1.1

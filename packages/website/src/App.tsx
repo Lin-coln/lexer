@@ -1,5 +1,5 @@
 import { Textarea } from "@src/components/Textarea.tsx";
-import { useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import cx from "clsx";
 
 const CODE = `int a = 10;
@@ -20,6 +20,17 @@ if(a == b){
 
 export default function App() {
   const [code, setCode] = useState(CODE);
+
+  const [tokens, setTokens] = useState<{ type: string; value: string }[]>([]);
+
+  useEffect(() => {
+    if (!code) {
+      setTokens([]);
+      return;
+    }
+    setTokens(tokenize(code));
+  }, [code]);
+
   return (
     <div className={cx("flex flex-col gap-4 p-4")}>
       <Textarea
@@ -28,11 +39,36 @@ export default function App() {
         onValueChange={setCode}
       />
 
-      <div className={cx("mx-auto")}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium
-        alias aliquid autem dignissimos ex hic id incidunt inventore iusto
-        minima nam nemo, odio quis reiciendis sit tempore totam ut vitae?
+      <div className={cx("mx-auto mt-4 w-[1080px]")}>
+        <div className={cx("mb-4 text-2xl")}>Tokens</div>
+
+        <div className={cx("block", "select-none")}>
+          {tokens.map((token, idx) => {
+            const chip = (
+              <TokenChip key={idx} type={token.type} value={token.value} />
+            );
+            if (token.type === "LineFeed") {
+              return (
+                <Fragment key={idx}>
+                  {chip}
+                  <br />
+                </Fragment>
+              );
+            }
+            return chip;
+          })}
+        </div>
       </div>
     </div>
   );
+}
+
+import { SourceCode, CTokenizer } from "@lexer/core";
+import { TokenChip } from "@src/components/TokenChip.tsx";
+
+function tokenize(code: string) {
+  const src = new SourceCode(new TextEncoder().encode(code));
+  const tokenizer = new CTokenizer();
+  CTokenizer.run(tokenizer, src);
+  return tokenizer.tokens;
 }

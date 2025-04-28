@@ -1,5 +1,5 @@
 {
-  "name": "@lincoln/lexer",
+  "name": "@lexer/core",
   "type": "module",
   "exports": {
     ".": {

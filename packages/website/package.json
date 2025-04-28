@@ -8,6 +8,7 @@
     "preview": "vite build && vite preview"
   },
   "dependencies": {
+    "@lexer/core": "workspace:*",
     "clsx": "^2.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
