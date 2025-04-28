@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+html {
+  @apply bg-neutral-800 text-neutral-200;
+  @apply scroll-smooth;
+}
