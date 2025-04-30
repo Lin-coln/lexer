@@ -31,6 +31,7 @@ enum State {
 
   // general
   Whitespace,
+  Indent,
   LineFeed,
   Identifier,
   Number,
@@ -66,6 +67,7 @@ export class Tokenizer extends Automaton<
 
     // from state
     if (state === State.Whitespace) return "Whitespace";
+    if (state === State.Indent) return "Indent";
     if (state === State.LineFeed) return "LineFeed";
     if (state === State.Identifier) return "Identifier";
     if (state === State.Number) return "Number";
@@ -155,6 +157,8 @@ export class Tokenizer extends Automaton<
     // white space & line feed & others
     else if (char === Constant.Whitespace) {
       if (state === null) return State.Whitespace;
+    } else if (char === Constant.Indent) {
+      if (state === null) return State.Indent;
     } else if (char === Constant.LineFeed) {
       if (state === null) return State.LineFeed;
     } else {

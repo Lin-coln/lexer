@@ -8,7 +8,7 @@ int c = 20;
 
 float f = 928.2332;
 char b = 'b';
-
+\t
 if(a == b){
     printf("Hello, World! \\"");
 }else if(b!=c){
@@ -45,7 +45,14 @@ export default function App() {
         <div className={cx("block", "select-none")}>
           {tokens.map((token, idx) => {
             const chip = (
-              <TokenChip key={idx} type={token.type} value={token.value} />
+              <TokenChip
+                key={idx}
+                type={token.type}
+                value={token.value}
+                onClick={() => {
+                  console.log(token);
+                }}
+              />
             );
             if (token.type === "LineFeed") {
               return (

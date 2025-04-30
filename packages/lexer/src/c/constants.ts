@@ -1,5 +1,6 @@
 export enum Constant {
   Whitespace = " ",
+  Indent = "\t",
   LineFeed = "\n",
 
   // symbol - bracket

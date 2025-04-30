@@ -26,7 +26,7 @@ export function Textarea(props: TextAreaProps) {
         "outline-0 ring-1 ring-neutral-50/20 hover:ring-neutral-50/20 focus:ring-neutral-50/30",
         "rounded-lg p-2",
         "h-[480px] w-[1080px]",
-        "text-base",
+        "font-mono text-base",
       ])}
     />
   );
